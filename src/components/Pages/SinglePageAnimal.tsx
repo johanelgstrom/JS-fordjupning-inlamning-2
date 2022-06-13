@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IAnimal } from "../../models/IAnimal";
-import { Button } from "../StyledComponents/Button";
-import { StyledImage } from "../StyledComponents/Image";
+import { Button, DangerButton } from "../StyledComponents/Button";
+import { StyledSingleImage } from "../StyledComponents/Image";
 import {
   StyledImageWrapper,
   StyledInfoWrapper,
@@ -17,7 +17,6 @@ interface ISinglePageAnimalProps {
 
 export const SinglePageAnimal = (props: ISinglePageAnimalProps) => {
   let params = useParams();
-  let paramsNum = parseInt(params.id!);
 
   const [animal, setAnimal] = useState<IAnimal>();
   let hungryStatus = "";
@@ -31,11 +30,7 @@ export const SinglePageAnimal = (props: ISinglePageAnimalProps) => {
     props.animalList.forEach((animal) => {
       let idString = animal.id.toString();
       if (idString === params.id) {
-        // animal.isFed = true;
-        // animal.lastFed = new Date().toISOString();
         props.animalIsFed(animal.id);
-        console.log("nomnom");
-        console.log(animal.isFed);
       }
     });
   };
@@ -53,7 +48,7 @@ export const SinglePageAnimal = (props: ISinglePageAnimalProps) => {
       <StyledSingleAnimalWrapper>
         <h3>{animal?.name}</h3>
         <StyledImageWrapper>
-          <StyledImage src={animal?.imageUrl} alt={animal?.name} />
+          <StyledSingleImage src={animal?.imageUrl} alt={animal?.name} />
         </StyledImageWrapper>
         <StyledInfoWrapper>{animal?.longDescription}</StyledInfoWrapper>
         <StyledShortInfoWrapper>
@@ -67,7 +62,7 @@ export const SinglePageAnimal = (props: ISinglePageAnimalProps) => {
         </StyledShortInfoWrapper>
         <StyledShortInfoWrapper>Matad: {hungryStatus}</StyledShortInfoWrapper>
         {animal?.isFed ? (
-          <Button>Mätt och belåten</Button>
+          <DangerButton>Mätt och belåten</DangerButton>
         ) : (
           <Button onClick={feedHandler}>Mata</Button>
         )}

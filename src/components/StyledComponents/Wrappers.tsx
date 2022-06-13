@@ -10,13 +10,19 @@ export const StyledMainWrapper = styled.div`
 export const StyledCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  background-color: red;
-  /* width: 45%; */
+  background-color: rgba(0, 0, 0, 0.2);
+  min-height: 530px;
+  border-radius: 5px;
+  margin: 10px 0 10px 0;
 `;
 
 export const StyledImageWrapper = styled.div`
-  width: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledInfoWrapper = styled.div`
@@ -29,6 +35,7 @@ export const StyledSingleAnimalWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 export const StyledShortInfoWrapper = styled.div`

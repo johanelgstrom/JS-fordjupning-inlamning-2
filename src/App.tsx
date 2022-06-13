@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       localStorage.setItem("animalList", JSON.stringify(animalList));
-    }, 1000);
+    }, 100);
   }, [animalList]);
 
   useEffect(() => {
@@ -28,14 +28,14 @@ function App() {
       axios
         .get<IAnimal[]>("https://animals.azurewebsites.net/api/animals")
         .then((response) => {
+          response.data[1].imageUrl = "https://via.placeholder.com/1337";
+
           localStorage.setItem("animalList", JSON.stringify(response.data));
           setAnimalList(response.data);
         });
-      console.log("added to localstorage");
     } else {
       let gotList: IAnimal[] = JSON.parse(getList);
       setAnimalList(gotList);
-      console.log("already in local storage");
     }
   }, []);
 
