@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { StyledHeader } from "./StyledComponents/Header";
 import { StyledHeading } from "./StyledComponents/Heading";
 import { StyledLink } from "./StyledComponents/Link";

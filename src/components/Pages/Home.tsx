@@ -6,8 +6,6 @@ interface IHomeProps {
 }
 
 export const Home = (props: IHomeProps) => {
-  console.log(props.animalList);
-
   return (
     <>
       {props.animalList.map((animal) => {
@@ -18,6 +16,7 @@ export const Home = (props: IHomeProps) => {
             imageUrl={animal.imageUrl}
             isFed={animal.isFed}
             id={animal.id}
+            key={animal.id}
           ></Animal>
         );
       })}

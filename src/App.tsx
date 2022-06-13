@@ -4,13 +4,16 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Pages/Home";
 import { SinglePageAnimal } from "./components/Pages/SinglePageAnimal";
+import { StyledHeading } from "./components/StyledComponents/Heading";
+import { StyledLoadingWrapper } from "./components/StyledComponents/Wrappers";
 import { IAnimal } from "./models/IAnimal";
 
 function App() {
   const [animalList, setAnimalList] = useState<IAnimal[]>([]);
+  const [isDoneLoading, setIsDoneLoading] = useState<boolean>(false);
 
   const animalIsFed = (id: number) => {
-    let tempList = [...animalList];
+    let tempList: IAnimal[] = [...animalList];
     tempList[id - 1].isFed = true;
     tempList[id - 1].lastFed = new Date().toISOString();
     setAnimalList(tempList);
@@ -32,31 +35,39 @@ function App() {
 
           localStorage.setItem("animalList", JSON.stringify(response.data));
           setAnimalList(response.data);
+          setIsDoneLoading(true);
         });
     } else {
       let gotList: IAnimal[] = JSON.parse(getList);
       setAnimalList(gotList);
+      setIsDoneLoading(true);
     }
   }, []);
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home animalList={animalList} />}></Route>
-            <Route
-              path="/:id"
-              element={
-                <SinglePageAnimal
-                  animalList={animalList}
-                  animalIsFed={animalIsFed}
-                />
-              }
-            ></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      {isDoneLoading ? (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home animalList={animalList} />}></Route>
+              <Route
+                path="/:id"
+                element={
+                  <SinglePageAnimal
+                    animalList={animalList}
+                    animalIsFed={animalIsFed}
+                  />
+                }
+              ></Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      ) : (
+        <StyledLoadingWrapper>
+          <StyledHeading>Gathering animals...</StyledHeading>
+        </StyledLoadingWrapper>
+      )}
     </>
   );
 }

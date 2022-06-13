@@ -19,7 +19,8 @@ export const SinglePageAnimal = (props: ISinglePageAnimalProps) => {
   let params = useParams();
 
   const [animal, setAnimal] = useState<IAnimal>();
-  let hungryStatus = "";
+
+  let hungryStatus: string = "";
   if (animal?.isFed === true) {
     hungryStatus = "Mätt";
   } else {
@@ -28,21 +29,20 @@ export const SinglePageAnimal = (props: ISinglePageAnimalProps) => {
 
   const feedHandler = () => {
     props.animalList.forEach((animal) => {
-      let idString = animal.id.toString();
+      let idString: string = animal.id.toString();
       if (idString === params.id) {
         props.animalIsFed(animal.id);
       }
     });
   };
-
   useEffect(() => {
     props.animalList.forEach((animal) => {
-      let idString = animal.id.toString();
+      let idString: string = animal.id.toString();
       if (idString === params.id) {
         setAnimal(animal);
       }
     });
-  }, []);
+  }, [params]);
   return (
     <>
       <StyledSingleAnimalWrapper>
