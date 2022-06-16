@@ -51,3 +51,13 @@ export const StyledLoadingWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const StyledNotFoundWrapper = styled.div`
+  width: 100%;
+  height: 80vh;
+  background-color: #ff3e3e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;

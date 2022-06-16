@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { StyledImage } from "./StyledComponents/Image";
 import { StyledLink } from "./StyledComponents/Link";
 import {
@@ -25,7 +23,7 @@ export const Animal = (props: IAnimalProps) => {
   }
   return (
     <>
-      <StyledLink to={"/" + props.id}>
+      <StyledLink to={"/animal/" + props.id}>
         <StyledCardWrapper>
           <h4>{props.name}</h4>
           <StyledImageWrapper>

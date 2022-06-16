@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Pages/Home";
+import { NotFound } from "./components/Pages/NotFound";
 import { SinglePageAnimal } from "./components/Pages/SinglePageAnimal";
 import { StyledHeading } from "./components/StyledComponents/Heading";
 import { StyledLoadingWrapper } from "./components/StyledComponents/Wrappers";
@@ -32,7 +33,6 @@ function App() {
         .get<IAnimal[]>("https://animals.azurewebsites.net/api/animals")
         .then((response) => {
           response.data[1].imageUrl = "https://via.placeholder.com/1337";
-
           localStorage.setItem("animalList", JSON.stringify(response.data));
           setAnimalList(response.data);
           setIsDoneLoading(true);
@@ -52,7 +52,7 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home animalList={animalList} />}></Route>
               <Route
-                path="/:id"
+                path="/animal/:id"
                 element={
                   <SinglePageAnimal
                     animalList={animalList}
@@ -60,6 +60,7 @@ function App() {
                   />
                 }
               ></Route>
+              <Route path="*" element={<NotFound />}></Route>
             </Route>
           </Routes>
         </BrowserRouter>
